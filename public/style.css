@@ -73,3 +73,5 @@ dialog form { display: flex; flex-direction: column; gap: 10px; }
 .dialog-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; }
 #loginMsg { min-height: 20px; font-size: 13px; }
 #loginMsg.err { color: var(--danger); }
+
+.error-box { margin: 0; padding: 14px 16px; background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); border-radius: var(--radius); font: 13px/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; word-break: break-word; grid-column: 1 / -1; }

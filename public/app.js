@@ -25,8 +25,18 @@ function renderBooks(books) {
   $('.book[data-id="' + selectedBook.id + '"]').addClass('selected');
 }
 
+// Shows the server's raw error, exactly as it came back (the SQL included).
+// Inserted as TEXT, so the error box itself is not an XSS hole.
+function showServerError(target, xhr) {
+  var e = xhr.responseJSON || {};
+  var text = 'Server error ' + xhr.status + ': ' + (e.error || xhr.statusText || 'no response');
+  if (e.sql) text += '\nSQL that ran: ' + e.sql;
+  $(target).empty().append($('<pre class="error-box">').text(text));
+}
+
 function search(q) {
-  $.getJSON('/api/books/search', { q: q }, renderBooks);
+  $.getJSON('/api/books/search', { q: q }, renderBooks)
+    .fail(function (xhr) { showServerError('#results', xhr); });
 }
 
 function loadReviews() {
@@ -79,7 +89,11 @@ $('#loginForm').on('submit', function (e) {
       $('#openLogin').hide();
       document.getElementById('loginDialog').close();
     },
-    error: function () { $('#loginMsg').addClass('err').text('Wrong username or password.'); }
+    error: function (xhr) {
+      var e = xhr.responseJSON || {};
+      var msg = xhr.status === 500 ? 'Server error: ' + e.error + (e.sql ? '  |  SQL: ' + e.sql : '') : 'Wrong username or password.';
+      $('#loginMsg').addClass('err').text(msg);
+    }
   });
 });
 
