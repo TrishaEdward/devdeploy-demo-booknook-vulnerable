@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BookNook</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">📚 BookNook</div>
+    <form id="searchForm" class="search">
+      <input id="q" placeholder="Search by title…" autocomplete="off">
+      <button class="btn" id="searchBtn" type="submit">Search</button>
+    </form>
+    <div class="account">
+      <span id="userChip" class="chip" hidden></span>
+      <button id="openLogin" class="btn ghost" type="button">Sign in</button>
+    </div>
+  </header>
+
+  <div class="warn-banner">⚠ Deliberately vulnerable demo app for DevDeploy. Never expose it to a network.</div>
+
+  <main class="layout">
+    <section>
+      <h2>Catalogue</h2>
+      <div id="results" class="grid"></div>
+    </section>
+
+    <aside>
+      <section class="card">
+        <h2>Reviews <span id="reviewBookTitle" class="muted"></span></h2>
+        <div id="reviews"></div>
+        <div class="form-row">
+          <input id="author" placeholder="Your name">
+          <textarea id="body" rows="2" placeholder="Write a review…"></textarea>
+          <button id="reviewBtn" class="btn" type="button">Post review</button>
+        </div>
+      </section>
+
+    </aside>
+  </main>
+
+  <dialog id="loginDialog">
+    <form id="loginForm">
+      <h2>Sign in</h2>
+      <input id="name" placeholder="Username" autocomplete="off">
+      <input id="password" type="password" placeholder="Password" autocomplete="off">
+      <div id="loginMsg"></div>
+      <div class="dialog-actions">
+        <button type="button" class="btn ghost" id="closeLogin">Cancel</button>
+        <button type="submit" class="btn">Sign in</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- jQuery 3.4.1: served from node_modules; has CVE-2020-11023 (on CISA's KEV list) -->
+  <script src="/vendor/jquery.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
